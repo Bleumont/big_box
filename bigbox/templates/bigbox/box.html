@@ -1,36 +1,74 @@
 {% extends 'bigbox/index.html' %} {% block content %} {% if single_box %}
-<div class="card">
-  <img src="https://picsum.photos/200/100" alt="Product" style="width: 100%" />
-  <p class="card-title">{{ single_box.name}}</p>
-  <p class="price">${{ single_box.price}}</p>
-  <div class="description">{{single_box.description}}</div>
-  <div class="activities">
-    <ul>
-      {% for activity in single_box.activities.all|slice:":5" %}
-      <li>{{ activity.name }}</li>
-      {% endfor %}
-    </ul>
+
+<div class="col-md-4">
+  <div class="card mb-4 box-shadow">
+    <img
+      class="card-img-top"
+      data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=XXXXXX"
+      alt="Bigbox"
+      style="height: 225px; width: 100%; display: block"
+      src="https://picsum.photos/348/255"
+      data-holder-rendered="true"
+    />
+    <div class="card-body">
+      <p class="card-title">{{ single_box.name }}</p>
+      <p class="text-muted">${{ single_box.price}}</p>
+      <small class="card-text">{{ single_box.description }}</small>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="activities">
+          <ul>
+            {% for activity in single_box.activities.all|slice:":5" %}
+            <li>{{ activity.name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="btn-group">
+          <a
+            class="btn btn-sm btn-outline-secondary"
+            href="{% url 'box_activities' single_box.id %}"
+            >Mas Actividades</a
+          >
+        </div>
+      </div>
+    </div>
   </div>
-  <a class="button" href="{% url 'box_activities' single_box.id %}"
-    >Mas Actividades</a
-  >
 </div>
 
 {% endif %} {% for box in slug_boxes %}
-
-<div class="card">
-  <img src="https://picsum.photos/200/100" alt="Product" style="width: 100%" />
-  <p class="card-title">{{ box.name}}</p>
-  <p class="price">${{ box.price}}</p>
-  <div class="description">{{box.description}}</div>
-  <div class="activities">
-    <ul>
-      {% for activity in box.activities.all|slice:":5" %}
-      <li>{{ activity.name }}</li>
-      {% endfor %}
-    </ul>
+<div class="col-md-4">
+  <div class="card mb-4 box-shadow">
+    <img
+      class="card-img-top"
+      data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+      alt="Bigbox"
+      style="height: 225px; width: 100%; display: block"
+      src="https://picsum.photos/348/255"
+      data-holder-rendered="true"
+    />
+    <div class="card-body">
+      <p class="card-text">{{ box.description }}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="activities">
+          <ul>
+            {% for activity in box.activities.all|slice:":5" %}
+            <li>{{ activity.name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="btn-group">
+          <a
+            class="btn btn-sm btn-outline-secondary"
+            href="{% url 'box_activities' box.id %}"
+            >Mas Actividades</a
+          >
+          <button type="button" class="btn btn-sm btn-outline-secondary">
+            Edit
+          </button>
+        </div>
+        <small class="text-muted">${{ box.price}}</small>
+      </div>
+    </div>
   </div>
-  <a class="button" href="{% url 'box_activities' box.id %}">Mas Actividades</a>
 </div>
 
 {% endfor %} {% endblock content %}
