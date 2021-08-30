@@ -1,0 +1,16 @@
+{% extends 'bigbox/index.html' %}
+
+{% block content %}
+
+<ul>
+    {% for box in boxes %}
+        <div>
+            <li>
+                {{ box.internal_name }}    
+            </li>
+            <a class="btn" href="{% url 'single_box' box.id %}">Detalles</a>
+        </div>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

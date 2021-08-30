@@ -1,0 +1,38 @@
+{% extends 'bigbox/index.html' %} {% block content %} {% if single_box %}
+<div class="card">
+  <img src="https://picsum.photos/200/100" alt="Product" style="width: 100%" />
+  <p class="card-title">{{ single_box.name}}</p>
+  <p class="price">${{ single_box.price}}</p>
+  <div class="description">{{single_box.description}}</div>
+  <div class="activities">
+    <ul>
+      {% for activity in single_box.activities.all|slice:":5" %}
+      <li>{{ activity.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <a class="button" href="{% url 'box_activities' single_box.id %}"
+    >Mas Actividades</a
+  >
+</div>
+
+{% endif %} {% if not slug_boxes %}
+<div>Sin resultados.</div>
+{% endif %} {% for box in slug_boxes %}
+
+<div class="card">
+  <img src="https://picsum.photos/200/100" alt="Product" style="width: 100%" />
+  <p class="card-title">{{ box.name}}</p>
+  <p class="price">${{ box.price}}</p>
+  <div class="description">{{box.description}}</div>
+  <div class="activities">
+    <ul>
+      {% for activity in box.activities.all|slice:":5" %}
+      <li>{{ activity.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <a class="button" href="{% url 'box_activities' box.id %}">Mas Actividades</a>
+</div>
+
+{% endfor %} {% endblock content %}

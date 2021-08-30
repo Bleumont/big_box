@@ -1,0 +1,19 @@
+{% extends 'bigbox/index.html' %}
+
+{% block content %}
+<ul>
+    <li>
+        {{ activity.name }}
+    </li>
+    <li>
+        {{ activity.description }}
+    </li>
+    <li>
+        {{ activity.category.slug }}
+    </li>
+    <li>
+        {{ activity.purchase_available }}
+    </li>
+</ul>
+
+{% endblock content %}
