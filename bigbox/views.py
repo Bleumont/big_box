@@ -47,8 +47,7 @@ def box_activities(request, box_id):
 
 
 def single_box_activity(request, box_id, activity_id):
-    box = Box.objects.get(id=box_id)
-    single_activity = Activity.objects.get(id=activity_id)
+    single_activity = Activity.objects.filter(id=activity_id, box=box_id)
     context = {'activity': single_activity}
 
     return render(request, 'bigbox/activity.html', context)
