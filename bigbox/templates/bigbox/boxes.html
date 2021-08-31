@@ -1,16 +1,38 @@
-{% extends 'bigbox/index.html' %}
-
-{% block content %}
-
-<ul>
-    {% for box in boxes %}
-        <div>
-            <li>
-                {{ box.internal_name }}    
-            </li>
-            <a class="btn" href="{% url 'single_box' box.id %}">Detalles</a>
+{% extends 'bigbox/index.html' %} {% block content %} {% for box in boxes %}
+<div class="col-md-4">
+  <div class="card mb-4 box-shadow">
+    <img
+      class="card-img-top"
+      data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=XXXXXX"
+      alt="Bigbox"
+      style="height: 225px; width: 100%; display: block"
+      src="https://picsum.photos/348/255"
+      data-holder-rendered="true"
+    />
+    <div class="card-body">
+      <h2>{{ box.name }}</h2>
+      <p class="text-muted">${{ box.price}}</p>
+      <small class="card-text">{{ box.description }}</small>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="activities">
+          <ul>
+            {% for activity in box.activities.all|slice:":5" %}
+            <li>{{ activity.name }}</li>
+            {% endfor %}
+          </ul>
         </div>
-    {% endfor %}
-</ul>
-
-{% endblock content %}
+        <div class="btn-group">
+          <a
+            class="btn btn-sm btn-outline-secondary"
+            href="{% url 'box_activities' box.id %}"
+            >Mas Actividades</a
+          >
+        </div>
+      </div>
+      <small
+        ><a href="{% url 'search_slug' box.slug %}"> #{{ box.slug }}</a></small
+      >
+    </div>
+  </div>
+</div>
+{% endfor %} {% endblock content %}

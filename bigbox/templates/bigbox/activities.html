@@ -1,25 +1,38 @@
-{% extends 'bigbox/index.html' %}
+{% extends 'bigbox/index.html' %} {% block content %}
 
-{% block content %}
-{% for activity in box_activities %}
-{{ activity.name }}<br>
-{% endfor %}
+    {% for activity in box_activities %}
+        <div class="card mb-4 box-shadow" >
+            <div class="card-body">
+                <h2><a href="{% url 'single_box_activity' box.id activity.id %}">{{ activity.name }}</h2></a>
+                <p class="text-muted">{{ activity.category.name}}</p>
+            </div>
+        </div>
+    {% endfor %}
 
-<div class="pagination">
-    <span class="step-links">
+    <ul class="pagination justify-content-center">
+      
         {% if box_activities.has_previous %}
-        <a href="?page=1">&laquo; Primera</a>
-        <a href="?page={{ box_activities.previous_page_number }}">Anterior</a>
+        <li class="page-item">
+            <a class="page-link" href="?page=1">&laquo;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ box_activities.previous_page_number }}"><</a>
+        </li>
         {% endif %}
-        
-        <span class="current">
-            Page {{ box_activities.number }} of {{ box_activities.paginator.num_pages }}.
-        </span>
-        
+
+        <li class="page-item">
+          <div class="page-link btn disabled">
+              Página {{ box_activities.number }} de {{ box_activities.paginator.num_pages }}.
+          </div>  
+        </li>
+
         {% if box_activities.has_next %}
-        <a href="?page={{ box_activities.next_page_number }}">Siguiente</a>
-        <a href="?page={{ box_activities.paginator.num_pages }}">Ultima &raquo;</a>
+        <a class="page-link" href="?page={{ box_activities.next_page_number }}">></a>
+        <a class="page-link" href="?page={{ box_activities.paginator.num_pages }}">&raquo;</a>
+
         {% endif %}
-    </span>
+      
+    </div>
+    {% endblock content %}
+  </div>
 </div>
-{% endblock content %}

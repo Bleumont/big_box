@@ -11,7 +11,7 @@
       data-holder-rendered="true"
     />
     <div class="card-body">
-      <p class="card-title">{{ single_box.name }}</p>
+      <h2>{{ single_box.name }}</h2>
       <p class="text-muted">${{ single_box.price}}</p>
       <small class="card-text">{{ single_box.description }}</small>
       <div class="d-flex justify-content-between align-items-center">
@@ -39,14 +39,16 @@
   <div class="card mb-4 box-shadow">
     <img
       class="card-img-top"
-      data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+      data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=XXXXXX"
       alt="Bigbox"
       style="height: 225px; width: 100%; display: block"
       src="https://picsum.photos/348/255"
       data-holder-rendered="true"
     />
     <div class="card-body">
-      <p class="card-text">{{ box.description }}</p>
+      <h2>{{ box.name }}</h2>
+      <p class="text-muted">${{ box.price}}</p>
+      <small class="card-text">{{ box.description }}</small>
       <div class="d-flex justify-content-between align-items-center">
         <div class="activities">
           <ul>
@@ -61,14 +63,15 @@
             href="{% url 'box_activities' box.id %}"
             >Mas Actividades</a
           >
-          <button type="button" class="btn btn-sm btn-outline-secondary">
-            Edit
-          </button>
         </div>
-        <small class="text-muted">${{ box.price}}</small>
       </div>
+      <small
+        ><a href="{% url 'search_slug' box.slug %}"> #{{ box.slug }}</a></small
+      >
     </div>
   </div>
 </div>
 
-{% endfor %} {% endblock content %}
+{% endfor %} {% if not slug_boxes and not single_box %}
+<h2>No hay coincidencias!</h2>
+{% endif %} {% endblock content %}
